@@ -8,7 +8,6 @@
     "worker"
   ],
   "scripts": {
-    "postinstall": "node scripts/install-wrangler-wrapper.mjs",
     "lint": "npm --prefix frontend run lint && npm --prefix worker run lint",
     "build:migrations": "node scripts/generate-migrations.mjs",
     "build": "npm --prefix frontend run build && npm --prefix worker run build",
@@ -17,8 +16,8 @@
     "test": "npm run test:js && npm run test:go",
     "security:check": "echo \"skip security check\"",
     "verify": "npm run build",
-    "verify:cloudflare": "node scripts/deploy-cloudflare.mjs --dry-run --outdir worker/.tmp/wrangler-dry-run --metafile worker/.tmp/wrangler-dry-run/metafile.json",
-    "deploy": "node scripts/deploy-cloudflare.mjs",
+    "verify:cloudflare": "npx wrangler deploy --dry-run --config worker/wrangler.toml",
+    "deploy": "npx wrangler deploy --config worker/wrangler.toml",
     "dev:worker": "npm --prefix worker run dev",
     "dev:frontend": "npm --prefix frontend run dev"
   },
